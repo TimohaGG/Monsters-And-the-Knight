@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Core">
+      <UniqueIdentifier>{a362b557-d0f6-4194-b9e9-7c16f1f32ebf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{fb50793f-512a-4345-b2a9-bffc4dc52456}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Entities">
+      <UniqueIdentifier>{bf89555e-a891-44c6-ad62-86359e994f6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Field">
+      <UniqueIdentifier>{6ed03d17-3495-4499-aa66-59933e8bc1a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Lib">
+      <UniqueIdentifier>{6792e31c-5e39-49ef-b305-b0d6eb276490}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Entities\Entity">
+      <UniqueIdentifier>{1f8d9bfc-ec42-497d-b025-cd4ca52154ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Entities\Monser">
+      <UniqueIdentifier>{3c18d4e3-974c-4389-8bbc-311d3a2f2ef9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Entities\Player">
+      <UniqueIdentifier>{c90c5123-41f0-49e7-807f-330431165e25}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Lib\Menu">
+      <UniqueIdentifier>{aae77c0e-fe03-42c0-ba6e-2b9ea266b61c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
