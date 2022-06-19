@@ -86,16 +86,16 @@ Monster FindMonster(int monsterX, int monsterY) {
 bool EnemyNear(Player player, Field field, Monster& MonsterToFight) {
 	int xTmp = player.x;
 	int yTmp = player.y;
-	if (field.GetEntity(player.x + 1, player.y) != ' ') {
+	if (field.GetEntity(player.x + 1, player.y) != ' '&& player.x +1<FieldSize) {
 		xTmp = player.x + 1;
 	}
-	else if (field.GetEntity(player.x - 1, player.y) != ' ') {
+	else if (field.GetEntity(player.x - 1, player.y) != ' '&&player.x-1>=0) {
 		xTmp = player.x - 1;
 	}
-	else if (field.GetEntity(player.x, player.y + 1) != ' ') {
+	else if (field.GetEntity(player.x, player.y + 1) != ' '&&player.y+1<FieldSize) {
 		yTmp = player.y + 1;
 	}
-	else if (field.GetEntity(player.x, player.y - 1) != ' ') {
+	else if (field.GetEntity(player.x, player.y - 1) != ' ' && player.y - 1 >= 0) {
 		yTmp = player.y - 1;
 	}
 	else return false;
@@ -124,9 +124,12 @@ void Menu::Options() {
 	}
 }
 
-void StartFight() {
+
+
+void StartFight(Monster MonsterToFight, Player player) {
 	Clear;
 
+	 
 }
 
 void Menu::BeginGame() {
@@ -150,12 +153,11 @@ void Menu::BeginGame() {
 
 		if (_getch()) {
 			Move(player, field, AccesableX, AccesableY);
-		}Monster MonsterToFight;
+		}
+		Monster MonsterToFight;
 
 		if (EnemyNear(player, field, MonsterToFight)) {
-
-
-			StartFight();
+			StartFight(MonsterToFight, player);
 
 		}
 		ClearConsole();

@@ -24,6 +24,7 @@ public:
 	Monster(_monsterType md);
 	Monster() : Entity() {
 	};
+	virtual ~Monster();
 	//----------struct----------
 	struct MonsterData {
 		string name;
