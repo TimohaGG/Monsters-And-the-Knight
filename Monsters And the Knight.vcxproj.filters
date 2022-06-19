@@ -25,8 +25,42 @@
     <Filter Include="Core\Entities\Player">
       <UniqueIdentifier>{c90c5123-41f0-49e7-807f-330431165e25}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Core\Lib\Menu">
+    <Filter Include="UI\Menu">
       <UniqueIdentifier>{aae77c0e-fe03-42c0-ba6e-2b9ea266b61c}</UniqueIdentifier>
     </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Core\Entities\Entity\Entity.cpp">
+      <Filter>Core\Entities\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Entities\Monster\Monster.cpp">
+      <Filter>Core\Entities\Monser</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Entities\Player\Player.cpp">
+      <Filter>Core\Entities\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Field\Field.cpp">
+      <Filter>Core\Field</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Menu\Menu.cpp">
+      <Filter>UI\Menu</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Core\Entities\Entity\Entity.h">
+      <Filter>Core\Entities\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Entities\Monster\Monster.h">
+      <Filter>Core\Entities\Monser</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Entities\Player\Player.h">
+      <Filter>Core\Entities\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Field\Field.h">
+      <Filter>Core\Field</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Menu\Menu.h">
+      <Filter>UI\Menu</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
