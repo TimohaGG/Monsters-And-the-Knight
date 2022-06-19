@@ -131,6 +131,7 @@
     <ClCompile Include="Core\Entities\Monster\Monster.cpp" />
     <ClCompile Include="Core\Entities\Player\Player.cpp" />
     <ClCompile Include="Core\Field\Field.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="UI\Menu\Menu.cpp" />
   </ItemGroup>
   <ItemGroup>
