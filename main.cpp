@@ -8,6 +8,10 @@ int main() {
 	Field field;
 	string PlayerName = "tim";
 	Player player(PlayerName);
+
+	static int MonsterNumber = 10;
+	Monster::CreateMonsters(MonsterNumber);
+
 	Menu menu(field, player);
 
 }

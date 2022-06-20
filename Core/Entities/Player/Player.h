@@ -8,6 +8,7 @@ public:
 	void IncreseLevel() { level++; damage += 4; }
 	void IncreseHP() { hp = 100; }
 	void SetHP(int hp) { this->hp = hp; }
+	void SetSkin(char skin) { this->skin = skin; }
 	Player(string name) :Entity(name, 100, 5, 0, 'P') {
 		x = 45;
 		y = 45;

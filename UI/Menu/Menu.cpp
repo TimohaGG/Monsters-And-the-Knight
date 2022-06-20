@@ -136,6 +136,18 @@ void LevelChoose(Player& player) {
 
 }
 
+void ChangeSkin(Player& player) {
+	cout << "Введите новый скин\n";
+	char newSkin;
+	cin >> newSkin;
+	player.SetSkin(newSkin);
+	
+}
+
+void Rules() {
+
+}
+
 void Menu::Options(Player& player) {
 	while (true) {
 		cout << "1. Уровень сложности\n";
@@ -143,17 +155,23 @@ void Menu::Options(Player& player) {
 		cout << "3. Правила игры\n";
 		int choise;
 		cin >> choise;
+		Clear;
 		switch (choise) {
 		case 1: {
 			LevelChoose(player);
 		}break;
-		case 2: {}break;
-		case 3: {}break;
+		case 2: {
+			ChangeSkin(player);
+		}break;
+		case 3: {
+			Rules();
+		}break;
 		default: {
 			Clear;
 			return;
 		}break;
 		}
+		Clear;
 	}
 	
 }
@@ -234,9 +252,7 @@ void StartFight(int MonsterIndex, Player& player) {
 void Menu::BeginGame(Field field, Player player) {
 	
 	
-	static int MonsterNumber = 10;
-
-	Monster::CreateMonsters(MonsterNumber);
+	
 	Monster::DedloyMonsters(field);
 
 	
