@@ -17,3 +17,5 @@ using std::string;
 #define FieldSize 100 
 #define HANDLECON HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE)
 #define SETCONSOLEPOS SetConsoleCursorPosition(hConsole, position)
+#define Wait(num) Sleep(num);
+

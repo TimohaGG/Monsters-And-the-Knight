@@ -24,7 +24,7 @@ public:
 	Monster(_monsterType md);
 	Monster() : Entity() {
 	};
-	virtual ~Monster();
+	
 	//----------struct----------
 	struct MonsterData {
 		string name;
@@ -42,9 +42,9 @@ public:
 	static Field DedloyMonsters(Field& field);
 	//----------fields-----------
 	static Monster* arr;
-
 	static int amount;
 
 };
 
 Monster* SetCoords(Monster*& arr, int amount);
+int getRandomNumber(int min, int max);

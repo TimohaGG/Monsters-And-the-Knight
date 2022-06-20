@@ -5,8 +5,9 @@ class Player : public Entity {
 public:
 	int GetLevel() { return level; }
 	void IncreseLevel() { level++; damage += 4; }
+	void IncreseHP() { hp = 100; }
 
-	Player(string name) :Entity(name, 100, 2, 0, 'P') {
+	Player(string name) :Entity(name, 100, 5, 0, 'P') {
 		x = 45;
 		y = 45;
 

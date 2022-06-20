@@ -1,6 +1,6 @@
 #include"Menu.h"
 
-void Move(Player& player, Field& field, int& AccesableX, int& AccesableY) {
+void Action(Player& player, Field& field, int& AccesableX, int& AccesableY) {
 
 	switch (_getch()) {
 	case 0x4B: {	//Left
@@ -52,7 +52,12 @@ void Move(Player& player, Field& field, int& AccesableX, int& AccesableY) {
 		}
 		break;
 	}
-
+	case 83 : 
+	case 115: {
+		Clear;
+		cout << "Shop\n";
+		Pause;
+	}break;
 	}
 
 }
@@ -62,7 +67,7 @@ void ClearConsole() {
 	COORD position = { 0,12 };
 	HANDLECON;
 	SETCONSOLEPOS;
-	for (size_t i = 0; i < 15; i++)
+	for (size_t i = 0; i < 17; i++)
 	{
 		for (size_t i = 0; i < 10; i++)
 		{
@@ -74,16 +79,16 @@ void ClearConsole() {
 	SETCONSOLEPOS;
 }
 
-Monster FindMonster(int monsterX, int monsterY) {
+int FindMonsterIndex(int monsterX, int monsterY) {
 	for (size_t i = 0; i < Monster::amount; i++)
 	{
 		if (Monster::arr[i].x == monsterX && Monster::arr[i].y == monsterY) {
-			return Monster::arr[i];
+			return i;
 		}
 	}
 }
 
-bool EnemyNear(Player player, Field field, Monster& MonsterToFight) {
+bool EnemyNear(Player player, Field field, int& MonsterIndex) {
 	int xTmp = player.x;
 	int yTmp = player.y;
 	if (field.GetEntity(player.x + 1, player.y) != ' '&& player.x +1<FieldSize) {
@@ -100,7 +105,7 @@ bool EnemyNear(Player player, Field field, Monster& MonsterToFight) {
 	}
 	else return false;
 
-	MonsterToFight = FindMonster(xTmp, yTmp);
+	MonsterIndex = FindMonsterIndex(xTmp, yTmp);
 	return true;
 }
 
@@ -124,17 +129,81 @@ void Menu::Options() {
 	}
 }
 
+int AttackMonster(Player& player, Monster& monster) {
+	
+	monster.DecreaseHP(player.GetDamage());
+	cout << "Вы ударили монстра " << monster.GetName() << ": -" << player.GetDamage() << "HP\n";
+	cout << "HP монстра: ";
+	if (monster.GetHp() < 0) cout << "0\n\n";
+	else cout << monster.GetHp() << "\n\n";
+	if (monster.IsKilled()) {
+		cout << "Вы победили монстра " << monster.GetName() << "\n";
+		cout << "+ " << monster.GetGold() << " золота\n";
+		cout << "Уровень повышен!\n";
+		int chanse = getRandomNumber(0, 2);
+		if (chanse == 0) {
+			cout << "Вы получили аптечку!!\n";
+			player.IncreseHP();
+		}
+		monster.SetKill();
+		player.AddGold(monster.GetGold());
+		player.IncreseLevel();
 
+		Wait(3000);
+	}
+	return monster.GetHp();
+}
 
-void StartFight(Monster MonsterToFight, Player player) {
+int AttackPlayer(Player& player, Monster& monster) {
+	if (!monster.IsKilled()) {
+	player.DecreaseHP(monster.GetDamage());
+	cout << "Вас ударил " << monster.GetName() << ": -" << monster.GetDamage() << "HP\n";
+	cout << "Ваш HP: " << player.GetHp()<<"\n";
+	Wait(2000);
+	}
+	return player.GetHp();
+}
+
+Monster DeleteMonster(int MonsterIndex) {
+	Monster* tmpArr = new Monster[Monster::amount - 1];
+	for (size_t i = 0; i < Monster::amount; i++)
+	{
+		if (i < MonsterIndex)
+			tmpArr[i] = Monster::arr[i];
+		else if (i > MonsterIndex)
+			tmpArr[i - 1] = Monster::arr[i];
+	}
+	delete[] Monster::arr;
+	Monster::arr = new Monster[Monster::amount - 1];
+	for (size_t i = 0; i < Monster::amount - 1; i++)
+	{
+		Monster::arr[i] = tmpArr[i];
+	}
+	delete[] tmpArr;
+	Monster::amount--;
+	return* Monster::arr;
+}
+
+void StartFight(int MonsterIndex, Player& player) {
+	COORD position = { 0,0 };
+	HANDLECON;
+	
+
+	Monster& enemy = Monster::arr[MonsterIndex];
 	Clear;
-
-	 
+	do {
+		AttackMonster(player, enemy);
+		Wait(2000);
+		AttackPlayer(player, enemy);
+		
+		Clear;
+	} while (!player.IsKilled() && !enemy.IsKilled());
+	
+	Clear;
 }
 
 void Menu::BeginGame() {
-	COORD position = { 0,0 };
-	HANDLECON;
+	
 	Field field;
 	static int MonsterNumber = 30;
 
@@ -150,18 +219,25 @@ void Menu::BeginGame() {
 		field.SetEntity(player.x, player.y, player.GetSkin());
 		field.PrintAccessableField(AccesableY, AccesableX);
 		cout << "Player: " << player.x << "\t" << player.y << "\n";
-
+		cout << "HP: " << player.GetHp()<<"\n";
+		cout << "Gold: " << player.GetGold()<<"\n";
 		if (_getch()) {
-			Move(player, field, AccesableX, AccesableY);
+			Action(player, field, AccesableX, AccesableY);
 		}
-		Monster MonsterToFight;
+		
+		int MonsterIndex;
+		if (EnemyNear(player, field, MonsterIndex)) {
+			StartFight(MonsterIndex, player);
+			if (Monster::arr[MonsterIndex].IsKilled()) {
+				field.SetEntity(Monster::arr[MonsterIndex].x, Monster::arr[MonsterIndex].y, ' ');
+				DeleteMonster(MonsterIndex);
 
-		if (EnemyNear(player, field, MonsterToFight)) {
-			StartFight(MonsterToFight, player);
-
+			}
+				
+				
 		}
 		ClearConsole();
-
+		
 
 	} while (!player.IsKilled() || Monster::amount != 0);
 }

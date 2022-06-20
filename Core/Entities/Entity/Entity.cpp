@@ -13,7 +13,10 @@ Entity::Entity()
 
 bool Entity::IsKilled()
 {
-	return isKilled;
+	if (hp <= 0)
+		return true;
+	else
+		return false;
 }
 
 int Entity::DecreaseHP(int damage)

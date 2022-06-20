@@ -15,7 +15,8 @@ public:
 	char GetSkin() { return skin; }
 	string GetName() { return name; }
 
-
+	//----------setters----------
+	void SetKill() { isKilled = true; }
 
 	//----------methods----------
 	bool IsKilled();

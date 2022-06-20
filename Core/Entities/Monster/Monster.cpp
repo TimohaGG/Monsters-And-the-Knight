@@ -83,6 +83,7 @@ Monster* SetCoords(Monster*& arr, int amount)
 
 
 
+
 Monster* Monster::CreateMonsters(int& amount)
 {
 	Monster::amount = amount;

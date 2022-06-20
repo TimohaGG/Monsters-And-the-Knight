@@ -4,7 +4,7 @@
 #include"../../Core/Entities/Monster/Monster.h"
 #include"../../Core/Field/Field.h"
 
-void Move(Player& player, Field& field, int& AccesableX, int& AccesableY);
+void Action(Player& player, Field& field, int& AccesableX, int& AccesableY);
 
 void ClearConsole();
 
