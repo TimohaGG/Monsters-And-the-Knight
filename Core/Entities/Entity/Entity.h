@@ -3,6 +3,7 @@
 
 class Entity {
 public:
+	
 	//----------constructor----------
 	Entity(string name, int hp, int damage, int gold, char skin)
 		:name(name), hp(hp), damage(damage), gold(gold), skin(skin), isKilled(false) {}

@@ -8,10 +8,11 @@ void Action(Player& player, Field& field, int& AccesableX, int& AccesableY);
 
 void ClearConsole();
 
-bool EnemyNear(Player player, Field field, Monster& MonsterToFight);
+bool EnemyNear(Player player, Field field, int& MonsterToFight);
 
 struct Menu {
-	Menu() {
+	
+	Menu(Field field, Player player) {
 		while (true) {
 			cout << "1. Новая игра\n";
 			cout << "2. Настройки\n";
@@ -21,11 +22,11 @@ struct Menu {
 			switch (choise) {
 			case 1: {
 				Clear;
-				BeginGame();
+				BeginGame(field, player);
 			}break;
 			case 2: {
 				Clear;
-				Options();
+				Options(player);
 			}break;
 			default:
 				exit(0);
@@ -33,6 +34,6 @@ struct Menu {
 		}
 	}
 
-	void Options();
-	void BeginGame();
+	void Options(Player& player);
+	void BeginGame(Field field, Player player);
 };

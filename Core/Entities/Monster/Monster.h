@@ -3,10 +3,12 @@
 #include"../../Field/Field.h"
 class Monster : public Entity {
 public:
+	
 	//----------getters----------
 	int GetAmount() { return amount; }
 
 	//----------setters----------
+	
 	//----------enum----------
 	enum _monsterType
 	{
@@ -43,7 +45,8 @@ public:
 	//----------fields-----------
 	static Monster* arr;
 	static int amount;
-
+	
+	
 };
 
 Monster* SetCoords(Monster*& arr, int amount);

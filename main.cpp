@@ -5,7 +5,9 @@ int main() {
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
 	srand(time(NULL));
-	
-	Menu menu;
+	Field field;
+	string PlayerName = "tim";
+	Player player(PlayerName);
+	Menu menu(field, player);
 
 }

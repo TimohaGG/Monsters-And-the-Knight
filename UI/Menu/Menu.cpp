@@ -110,8 +110,33 @@ bool EnemyNear(Player player, Field field, int& MonsterIndex) {
 	return true;
 }
 
+void LevelChoose(Player& player) {
+	
+	int choise;
+	do {
+		Clear;
+		cout << "1. Легкий\n2. Средний\n3.Сложный\n";
+		cin >> choise;
+	} while (choise < 0 || choise>3);
 
-void Menu::Options() {
+	switch (choise) {
+	case 1: {
+		Monster::amount = 10;	
+		player.SetHP(100);
+	}break;
+	case 2: {
+		Monster::amount = 20;
+		player.SetHP(80);
+	}break;
+	case 3: {
+		Monster::amount = 30;	
+		player.SetHP(60);
+	}break;
+	}
+
+}
+
+void Menu::Options(Player& player) {
 	while (true) {
 		cout << "1. Уровень сложности\n";
 		cout << "2. Замена скинов\n";
@@ -119,7 +144,9 @@ void Menu::Options() {
 		int choise;
 		cin >> choise;
 		switch (choise) {
-		case 1: {}break;
+		case 1: {
+			LevelChoose(player);
+		}break;
 		case 2: {}break;
 		case 3: {}break;
 		default: {
@@ -128,6 +155,7 @@ void Menu::Options() {
 		}break;
 		}
 	}
+	
 }
 
 int AttackMonster(Player& player, Monster& monster) {
@@ -203,15 +231,15 @@ void StartFight(int MonsterIndex, Player& player) {
 	Clear;
 }
 
-void Menu::BeginGame() {
+void Menu::BeginGame(Field field, Player player) {
 	
-	Field field;
-	static int MonsterNumber = 30;
+	
+	static int MonsterNumber = 10;
 
 	Monster::CreateMonsters(MonsterNumber);
 	Monster::DedloyMonsters(field);
 
-	Player player("Tim");
+	
 
 	int AccesableX = 40;
 	int AccesableY = 40;
