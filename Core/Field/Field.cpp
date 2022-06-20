@@ -40,10 +40,6 @@ void Field::PrintAccessableField(int y, int x)
 				cout << "# ";
 			else
 				cout << field[i][j] << " ";
-			/*if (j == x || j == x + 11)
-				cout << "# ";
-			else
-				cout << field[i][j]<<" ";*/
 		}
 		cout << "\n";
 	}

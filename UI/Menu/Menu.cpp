@@ -52,10 +52,11 @@ void Action(Player& player, Field& field, int& AccesableX, int& AccesableY) {
 		}
 		break;
 	}
-	case 83 : 
-	case 115: {
+	case 83:
+	case 115:
+	{
 		Clear;
-		cout << "Shop\n";
+		cout << "Shop";
 		Pause;
 	}break;
 	}
@@ -67,7 +68,7 @@ void ClearConsole() {
 	COORD position = { 0,12 };
 	HANDLECON;
 	SETCONSOLEPOS;
-	for (size_t i = 0; i < 17; i++)
+	for (size_t i = 0; i < 15; i++)
 	{
 		for (size_t i = 0; i < 10; i++)
 		{
@@ -221,10 +222,10 @@ void Menu::BeginGame() {
 		cout << "Player: " << player.x << "\t" << player.y << "\n";
 		cout << "HP: " << player.GetHp()<<"\n";
 		cout << "Gold: " << player.GetGold()<<"\n";
-		if (_getch()) {
-			Action(player, field, AccesableX, AccesableY);
-		}
 		
+
+		Action(player, field, AccesableX, AccesableY);
+
 		int MonsterIndex;
 		if (EnemyNear(player, field, MonsterIndex)) {
 			StartFight(MonsterIndex, player);
