@@ -5,11 +5,9 @@
 #include"../../Core/Field/Field.h"
 
 void Action(Player& player, Field& field, int& AccesableX, int& AccesableY);
-
 void ClearConsole();
-
 bool EnemyNear(Player player, Field field, int& MonsterToFight);
-
+void Instructions();
 struct Menu {
 	
 	Menu(Field field, Player player) {
@@ -22,6 +20,9 @@ struct Menu {
 			switch (choise) {
 			case 1: {
 				Clear;
+				Instructions();
+				Pause;
+				Clear;
 				BeginGame(field, player);
 			}break;
 			case 2: {
@@ -33,7 +34,7 @@ struct Menu {
 			}
 		}
 	}
-
+	
 	void Options(Player& player);
 	void BeginGame(Field field, Player player);
 };

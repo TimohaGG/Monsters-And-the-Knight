@@ -2,8 +2,8 @@
 
 Monster::MonsterData Monster::monsterdata[Monster::AMOUNT]{
 	//name	hp	damage	gold	skin
-	{ "Slime",  20, 3, 10 ,'S'},
-	{ "Goblin", 25, 4, 25, 'G' },
+	{ "Slime",  20, 3, 10 ,'s'},
+	{ "Goblin", 25, 4, 25, 'g' },
 	{ "Zombie", 30, 4, 30, 'Z' },
 	{ "Sceletton", 30, 5, 30, 'S' },
 	{ "Orc", 50, 8, 50, 'O'},
@@ -97,4 +97,9 @@ Monster* Monster::CreateMonsters(int& amount)
 }
 
 Monster* Monster::arr = NULL;
-int Monster::amount = 0;
+int Monster::amount = 10;
+
+void Monster::MonsterData::PrintInf()
+{
+	cout << "Monster: " << name << " (" << skin << ")\t" << "HP: " << hp << "\t\tDamage: " << damage << "\n";
+}

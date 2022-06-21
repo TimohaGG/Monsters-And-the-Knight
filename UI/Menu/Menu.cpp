@@ -1,5 +1,12 @@
 #include"Menu.h"
-
+void Instructions()
+{
+	cout << "Обозначения монстров:\n\n";
+	for (size_t i = 0; i < Monster::_monsterType::AMOUNT; i++)
+	{
+		Monster::monsterdata[i].PrintInf();
+	}
+}
 void Action(Player& player, Field& field, int& AccesableX, int& AccesableY) {
 
 	switch (_getch()) {
@@ -58,6 +65,13 @@ void Action(Player& player, Field& field, int& AccesableX, int& AccesableY) {
 		Clear;
 		cout << "Shop";
 		Pause;
+	}break;
+	case 73:
+	case 105: {
+		Clear;
+		Instructions();
+		Pause;
+		Clear;
 	}break;
 	}
 
@@ -145,8 +159,16 @@ void ChangeSkin(Player& player) {
 }
 
 void Rules() {
-
+	cout << "Что бы победить вам нужно убить всех монстров\n";
+	cout << "Управление персонажем происходит стрелочками\n";
+	cout << "Что бы открыть магазин нажмите \"s\"\n";
+	cout << "Для начала боя подойдите близко к монстру\n\n";
+	cout << "ДОЛЖНА СТОЯТЬ АНГЛИЙСКАЯ РАСКЛАДКА!!!\n";
+	Pause;
+	Clear;
 }
+
+
 
 void Menu::Options(Player& player) {
 	while (true) {
@@ -177,27 +199,29 @@ void Menu::Options(Player& player) {
 }
 
 int AttackMonster(Player& player, Monster& monster) {
-	
-	monster.DecreaseHP(player.GetDamage());
-	cout << "Вы ударили монстра " << monster.GetName() << ": -" << player.GetDamage() << "HP\n";
-	cout << "HP монстра: ";
-	if (monster.GetHp() < 0) cout << "0\n\n";
-	else cout << monster.GetHp() << "\n\n";
-	if (monster.IsKilled()) {
-		cout << "Вы победили монстра " << monster.GetName() << "\n";
-		cout << "+ " << monster.GetGold() << " золота\n";
-		cout << "Уровень повышен!\n";
-		int chanse = getRandomNumber(0, 2);
-		if (chanse == 0) {
-			cout << "Вы получили аптечку!!\n";
-			player.IncreseHP();
-		}
-		monster.SetKill();
-		player.AddGold(monster.GetGold());
-		player.IncreseLevel();
+	if (!player.IsKilled()) {
+		monster.DecreaseHP(player.GetDamage());
+		cout << "Вы ударили монстра " << monster.GetName() << ": -" << player.GetDamage() << "HP\n";
+		cout << "HP монстра: ";
+		if (monster.GetHp() < 0) cout << "0\n\n";
+		else cout << monster.GetHp() << "\n\n";
+		if (monster.IsKilled()) {
+			cout << "Вы победили монстра " << monster.GetName() << "\n";
+			cout << "+ " << monster.GetGold() << " золота\n";
+			cout << "Уровень повышен!\n";
+			int chanse = getRandomNumber(0, 2);
+			if (chanse == 0) {
+				cout << "Вы получили аптечку!!\n";
+				player.IncreseHP();
+			}
+			monster.SetKill();
+			player.AddGold(monster.GetGold());
+			player.IncreseLevel();
 
-		Wait(3000);
+			Wait(3000);
+		}
 	}
+	
 	return monster.GetHp();
 }
 
@@ -252,7 +276,7 @@ void StartFight(int MonsterIndex, Player& player) {
 void Menu::BeginGame(Field field, Player player) {
 	
 	
-	
+	Monster::CreateMonsters(Monster::amount);
 	Monster::DedloyMonsters(field);
 
 	
@@ -260,13 +284,12 @@ void Menu::BeginGame(Field field, Player player) {
 	int AccesableX = 40;
 	int AccesableY = 40;
 	do {
-
 		field.SetEntity(player.x, player.y, player.GetSkin());
 		field.PrintAccessableField(AccesableY, AccesableX);
 		cout << "Player: " << player.x << "\t" << player.y << "\n";
 		cout << "HP: " << player.GetHp()<<"\n";
 		cout << "Gold: " << player.GetGold()<<"\n";
-		
+		cout << "Осталось врагов: "<<Monster::amount<<"\n";
 
 		Action(player, field, AccesableX, AccesableY);
 
@@ -284,5 +307,5 @@ void Menu::BeginGame(Field field, Player player) {
 		ClearConsole();
 		
 
-	} while (!player.IsKilled() || Monster::amount != 0);
+	} while (!player.IsKilled() && Monster::amount != 0);
 }

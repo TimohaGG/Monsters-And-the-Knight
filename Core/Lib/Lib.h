@@ -5,11 +5,14 @@
 #include<Windows.h>
 #include <stdio.h>
 #include <conio.h>
+#include<iomanip>
 //----------namespace----------
 using std::cin;
 using std::cout;
 using std::string;
-
+using std::setw;
+using std::left;
+using std::right;
 //----------defines----------
 
 #define Pause system("pause")

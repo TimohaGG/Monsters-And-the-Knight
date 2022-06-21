@@ -34,6 +34,7 @@ public:
 		int damage;
 		int gold;
 		char skin;
+		void PrintInf();
 	};
 
 	//----------methods----------
